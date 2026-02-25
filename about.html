@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Ahmad's Flask App</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            padding: 50px 40px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(12px);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 { font-size: 34px; margin-bottom: 16px; }
+        h1 span { color: #63b3ed; }
+
+        p {
+            color: #a0aec0;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tag {
+            background: rgba(99,179,237,0.15);
+            border: 1px solid #63b3ed44;
+            color: #63b3ed;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 11px 26px;
+            background: transparent;
+            color: #63b3ed;
+            border: 2px solid #63b3ed;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(99,179,237,0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About <span>This App</span></h1>
+        <p>
+            This is a simple Flask web application built with Python. It's designed to be minimal, clean, and easy to deploy — perfect for learning CI/CD pipelines and GitHub workflows.
+        </p>
+        <p>Built by <strong>Ahmad</strong> as a starting point for cloud deployment on AWS EC2.</p>
+
+        <div class="stack">
+            <span class="tag">Python 3</span>
+            <span class="tag">Flask</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">AWS EC2</span>
+            <span class="tag">GitHub</span>
+        </div>
+
+        <a href="/" class="btn">← Back Home</a>
+    </div>
+</body>
+</html>
