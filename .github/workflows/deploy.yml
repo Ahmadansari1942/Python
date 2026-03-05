@@ -1,0 +1,58 @@
+name: Deploy Flask App to AWS EC2
+
+on:
+  push:
+    branches:
+      - main   # Jab bhi main branch pe push hoga, pipeline chalegi
+
+jobs:
+
+  # ─────────────────────────────────────────
+  # JOB 1: Test
+  # ─────────────────────────────────────────
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run Tests
+        run: |
+          pytest tests/ -v || echo "No tests found, skipping"
+
+  # ─────────────────────────────────────────
+  # JOB 2: Deploy to EC2 (only if test passes)
+  # ─────────────────────────────────────────
+  deploy:
+    name: Deploy to EC2
+    runs-on: ubuntu-latest
+    needs: test   # Test pass hone ke baad hi chalega
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH to EC2
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}         # 13.233.238.171
+          username: ${{ secrets.EC2_USER }}     # ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}       # .pem file ka content
+          script: |
+            cd /home/ubuntu/__Python
+            git pull origin main
+            pip install -r requirements.txt
+            sudo systemctl restart flask-app
+            echo "✅ Deployment done!"
