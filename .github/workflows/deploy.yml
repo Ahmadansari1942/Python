@@ -3,7 +3,7 @@ name: Deploy Flask App to AWS EC2
 on:
   push:
     branches:
-      - main   # Jab bhi main branch pe push hoga, pipeline chalegi
+      
 
 jobs:
 
@@ -51,7 +51,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}     # ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}       # .pem file ka content
           script: |
-            cd /home/ubuntu/__Python
+            cd /home/ubuntu/Python
             git pull origin main
             pip install -r requirements.txt
             sudo systemctl restart flask-app
